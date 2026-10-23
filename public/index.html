@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <p class="eyebrow">HOTEL MANAGEMENT SYSTEM</p>
+        <h1>Hotel Booking System</h1>
+        <p>Search rooms, manage reservations and explore availability.</p>
+    </header>
+
+    <main>
+        <section class="stats">
+            <article class="stat">
+                <span>Total Rooms</span>
+                <strong id="totalRooms">0</strong>
+            </article>
+            <article class="stat">
+                <span>Total Bookings</span>
+                <strong id="totalBookings">0</strong>
+            </article>
+        </section>
+
+        <section class="panel">
+            <h2>Search Available Rooms</h2>
+            <form id="searchForm" class="form-grid">
+                <label>Hotel
+                    <select id="searchHotel">
+                        <option value="">All Hotels</option>
+                        <option value="City Hotel">City Hotel</option>
+                        <option value="Resort Hotel">Resort Hotel</option>
+                    </select>
+                </label>
+                <label>Room Type
+                    <select id="searchType">
+                        <option value="">All Types</option>
+                    </select>
+                </label>
+                <label>Check-in
+                    <input id="checkIn" type="date" required>
+                </label>
+                <label>Check-out
+                    <input id="checkOut" type="date" required>
+                </label>
+                <button type="submit">Search Rooms</button>
+            </form>
+            <div id="searchResults" class="room-grid"></div>
+        </section>
+
+        <section class="panel">
+            <h2 id="roomFormTitle">Add a Room</h2>
+            <form id="addRoomForm" class="form-grid">
+                <input id="editRoomId" type="hidden">
+                <label>Room Number
+                    <input id="roomNo" placeholder="e.g. 401" required>
+                </label>
+                <label>Hotel
+                    <select id="hotel" required>
+                        <option value="">Choose hotel</option>
+                        <option value="City Hotel">City Hotel</option>
+                        <option value="Resort Hotel">Resort Hotel</option>
+                    </select>
+                </label>
+                <label>Room Type
+                    <input id="roomType" placeholder="e.g. Deluxe or A" required>
+                </label>
+                <label>Price per Night (₹)
+                    <input id="price" type="number" min="0" step="0.01" required>
+                </label>
+                <div class="form-actions">
+                    <button type="submit" id="saveRoomButton">Add Room</button>
+                    <button type="button" id="cancelEdit" class="secondary" hidden>Cancel Edit</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="section-heading">
+                <h2>All Rooms</h2>
+                <button type="button" class="secondary" id="refreshRooms">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room</th><th>Hotel</th><th>Type</th>
+                            <th>Price/Night</th><th>Status</th><th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roomsTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="section-heading">
+                <h2>Bookings</h2>
+                <button type="button" class="secondary" id="refreshBookings">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Guest</th><th>Room</th><th>Hotel</th>
+                            <th>Check-in</th><th>Check-out</th><th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <dialog id="bookingDialog">
+        <form id="bookingForm">
+            <h2>Book Room <span id="bookingRoomLabel"></span></h2>
+            <input type="hidden" id="bookingRoomId">
+            <label>Guest Name
+                <input id="guestName" required maxlength="100" autocomplete="name">
+            </label>
+            <label>Check-in
+                <input type="date" id="bookingCheckIn" required>
+            </label>
+            <label>Check-out
+                <input type="date" id="bookingCheckOut" required>
+            </label>
+            <div class="form-actions">
+                <button type="submit">Confirm Booking</button>
+                <button type="button" id="closeDialog" class="secondary">Close</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div id="message" role="status" aria-live="polite"></div>
+</body>
+</html>
